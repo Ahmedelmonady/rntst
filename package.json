@@ -41,14 +41,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zakyyy/react-native-gameball.git"
+    "url": "git+https://github.com/gameballers/gameball-react-native"
   },
   "author": "Ahmed Zaki <ahmedzakivic@gmail.com> (https://github.com/Zakyyy)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Zakyyy/react-native-gameball/issues"
+    "url": "https://github.com/gameballers/gameball-react-native/issues"
   },
-  "homepage": "https://github.com/Zakyyy/react-native-gameball#readme",
+  "homepage": "https://github.com/gameballers/gameball-react-native#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
