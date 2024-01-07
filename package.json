@@ -1,6 +1,6 @@
 {
   "name": "react-native-gameball",
-  "version": "0.1.0",
+  "version": "2.0.26",
   "description": "React native package for Gameball widget",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -55,6 +55,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.2",
     "@evilmartians/lefthook": "^1.5.0",
+    "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native/eslint-config": "^0.72.2",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
@@ -67,9 +68,12 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.1.1",
     "prettier": "^2.0.5",
-    "react": "18.2.0",
-    "react-native": "0.72.6",
+    "react": "^18.2.0",
+    "react-native": "^0.70.0",
     "react-native-builder-bob": "^0.20.0",
+    "react-native-modal": "^13.0.1",
+    "react-native-push-notification-popup": "^1.6.1",
+    "react-native-webview": "*",
     "release-it": "^15.0.0",
     "typescript": "^5.0.2"
   },

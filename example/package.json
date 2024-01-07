@@ -5,22 +5,32 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "ios": "expo start --ios"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-native-firebase/app": "^16.4.3",
+    "@react-native-firebase/messaging": "^16.4.3",
+    "@react-navigation/bottom-tabs": "^6.4.0",
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.0",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
-    "react-native": "0.72.6",
     "react-dom": "18.2.0",
+    "react-native": "0.72.6",
+    "react-native-gameball": "^2.0.27",
+    "react-native-modal": "^13.0.1",
+    "react-native-push-notification-popup": "^1.6.1",
+    "react-native-safe-area-context": "4.6.3",
+    "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "babel-plugin-module-resolver": "^5.0.0",
-    "@expo/webpack-config": "^18.0.1",
-    "babel-loader": "^8.1.0"
+    "@expo/webpack-config": "^19.0.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-module-resolver": "^5.0.0"
   },
   "private": true
 }
