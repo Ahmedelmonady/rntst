@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { InAppNotification } from 'react-native-gameball';
 import { AuthScreen, FullScreenWidget, ModalWidgetScreen } from './screens';
-import messaging, {
-  FirebaseMessagingTypes,
-} from '@react-native-firebase/messaging';
+
 import WidgetInitialization from './screens/WidgetInitialization';
-import type { GBNotification } from 'react-native-gameball';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 export type RootStackParamList = {
@@ -37,25 +34,11 @@ const AppNav = () => {
   );
 };
 const App = () => {
-  const [notificationData, setNotificationData] = useState<
-    FirebaseMessagingTypes.RemoteMessage | undefined
-  >(undefined);
-  useEffect(() => {
-    messaging()
-      .getToken()
-      .then((token) => console.log(token));
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      setNotificationData(remoteMessage);
-      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
-    return unsubscribe;
-  }, []);
   return (
     <>
       <AppNav />
-      <InAppNotification
-        notification={notificationData?.data as unknown as GBNotification}
-      />
+      {/* notification data to be passed here */}
+      <InAppNotification notification={null} />
     </>
   );
 };

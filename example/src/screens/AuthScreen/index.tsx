@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { GameballSDK } from 'react-native-gameball';
-import messaging from '@react-native-firebase/messaging';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../App';
 
@@ -23,17 +22,12 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
   const [playerUniqueId, setPlayerUniqueId] = useState(
     '64ef0b4c8999c0faa99b36d3'
   );
-  const [pushToken, setPushToken] = useState('');
-  useEffect(() => {
-    messaging()
-      .getToken()
-      .then((token) => setPushToken(token));
-  }, []);
 
   const initializePlayer = () => {
     GameballSDK.registerPlayer({
       playerUniqueId: playerUniqueId,
-      deviceToken: pushToken ?? '',
+      //Add firebase messaging token
+      deviceToken: 'TEST',
       referrerCode: '',
       playerAttributes: {
         displayName: displayName,
