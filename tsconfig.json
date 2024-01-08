@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
     "rootDir": ".",
-    "paths": {
-      "react-native-gameball": ["./src/index"]
-    },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react",
     "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",
