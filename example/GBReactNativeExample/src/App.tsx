@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {InAppNotification} from 'react-native-gameball';
+import {InAppNotification, type GBNotification} from 'react-native-gameball';
 import {AuthScreen, FullScreenWidget, ModalWidgetScreen} from './screens';
 
 import WidgetInitialization from './screens/WidgetInitialization';
+import messaging from '@react-native-firebase/messaging';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 export type RootStackParamList = {
@@ -33,21 +34,24 @@ const AppNav = () => {
     </NavigationContainer>
   );
 };
+
 const App = () => {
+  const [notificationData, setNotificationData] =
+    useState<null | GBNotification>(null);
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      if (remoteMessage.data) {
+        setNotificationData(remoteMessage.data as unknown as GBNotification);
+      }
+
+      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+    return unsubscribe;
+  }, []);
   return (
     <>
       <AppNav />
-      {/* notification data to be passed here */}
-      <InAppNotification
-        notification={{
-          body: 's',
-          type: 'Small Toast',
-          icon: '',
-          title: '',
-          frequency: 2,
-          msgId: 's',
-        }}
-      />
+      <InAppNotification notification={notificationData} />
     </>
   );
 };

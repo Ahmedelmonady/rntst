@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Button, PermissionsAndroid} from 'react-native';
+import React, {useState} from 'react';
+import {Button} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {TextInput} from 'react-native';
 import {SafeAreaView} from 'react-native';
@@ -52,7 +52,7 @@ const AuthScreen = ({navigation}: AuthScreenProps) => {
       .then(() => {
         navigation.navigate('Home');
       })
-      .catch(err => console.log('ERROR' + err));
+      .catch(err => console.log('ERROR' + err.toString()));
   };
   return (
     <SafeAreaView style={{flex: 1}}>
