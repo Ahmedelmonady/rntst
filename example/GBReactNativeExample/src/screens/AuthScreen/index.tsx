@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Button } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { TextInput } from 'react-native';
-import { SafeAreaView } from 'react-native';
-import { GameballSDK } from 'react-native-gameball';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { RootStackParamList } from '../../App';
-
+import React, {useEffect, useState} from 'react';
+import {Button, PermissionsAndroid} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {TextInput} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import {GameballSDK} from 'react-native-gameball';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import type {RootStackParamList} from '../../App';
+import messaging from '@react-native-firebase/messaging';
 type AuthScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'Auth'
@@ -15,19 +15,25 @@ type AuthScreenNavigationProp = NativeStackNavigationProp<
 type AuthScreenProps = {
   navigation: AuthScreenNavigationProp;
 };
-const AuthScreen = ({ navigation }: AuthScreenProps) => {
+const AuthScreen = ({navigation}: AuthScreenProps) => {
   const [displayName, setDisplayName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [playerUniqueId, setPlayerUniqueId] = useState(
-    '64ef0b4c8999c0faa99b36d3'
+    //Testing ID
+    '64ef0b4c8999c0faa99b36d3',
   );
 
-  const initializePlayer = () => {
+  const getPushToken = async () => {
+    return await messaging().getToken();
+  };
+
+  const initializePlayer = async () => {
+    const token = await getPushToken();
     GameballSDK.registerPlayer({
       playerUniqueId: playerUniqueId,
       //Add firebase messaging token
-      deviceToken: 'TEST',
+      deviceToken: token ?? 'TEST',
       referrerCode: '',
       playerAttributes: {
         displayName: displayName,
@@ -38,7 +44,7 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
         },
       },
     })
-      .then((res) => {
+      .then(res => {
         console.log('SUCCESS');
         console.log(res);
         // res.json();
@@ -46,10 +52,10 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
       .then(() => {
         navigation.navigate('Home');
       })
-      .catch((err) => console.log('ERROR' + err));
+      .catch(err => console.log('ERROR' + err));
   };
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <TextInput
         value={playerUniqueId}
         onChangeText={setPlayerUniqueId}

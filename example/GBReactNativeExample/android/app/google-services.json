@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "132736106963",
+    "project_id": "gbtest-eb2a7",
+    "storage_bucket": "gbtest-eb2a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132736106963:android:0c03111987763b257eef26",
+        "android_client_info": {
+          "package_name": "com.gbreactnativeexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg8KEi6dyFlR6Gga8iZ-tBdnG9YNpIGrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132736106963:android:9567c553d3fbc71a7eef26",
+        "android_client_info": {
+          "package_name": "com.monady.gb_android_sample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg8KEi6dyFlR6Gga8iZ-tBdnG9YNpIGrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
