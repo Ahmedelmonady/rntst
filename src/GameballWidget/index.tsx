@@ -10,6 +10,7 @@ import {
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
 import Modal from 'react-native-modal';
 import styles from './styles';
+import { LanguageUtils } from './languageUttils';
 const package_json = require('../../package.json');
 
 interface Props {
@@ -176,13 +177,15 @@ class GameballWidget extends React.Component<Props, State> {
       `${openDetail ? `&openDetail=${openDetail}` : ''}` +
       `${hideNavigation ? `&hideNavigation=${hideNavigation}` : ''}`;
 
+    const isRtl = LanguageUtils.isRtl(lang);
+
     return this.props.modal ? (
       <Modal isVisible={this.state.showModal} style={styles.modalStyle}>
         <View style={styles.modalContainerStyle}>
           <TouchableOpacity
             onPress={() => this.setState({ showModal: false })}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            style={styles.closeButtonStyle}
+            style={isRtl ? styles.closeButtonStyleRtl : styles.closeButtonStyleLtr}
           >
             <Image
               source={require('../Assets/close.png')}
