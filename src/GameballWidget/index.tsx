@@ -147,6 +147,7 @@ class GameballWidget extends React.Component<Props, State> {
         originWhitelist={originWhitelist}
         showsVerticalScrollIndicator={false}
         onMessage={this.onMessage}
+        androidHardwareAccelerationDisabled={false}
         injectedJavaScriptBeforeContentLoaded="
         if (navigator.share == null) {
           navigator.share = (param) => {
