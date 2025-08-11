@@ -1,59 +1,83 @@
-import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {InAppNotification, type GBNotification} from 'react-native-gameball';
-import {AuthScreen, FullScreenWidget, ModalWidgetScreen} from './screens';
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+import GameballApp, { type GameballConfig } from '../../../src';
 
-import WidgetInitialization from './screens/WidgetInitialization';
-import messaging from '@react-native-firebase/messaging';
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-export type RootStackParamList = {
-  Init: undefined; // No additional parameters for Init screen
-  Auth: undefined; // No additional parameters for Auth screen
-  Home: undefined; // No additional parameters for Home screen
-};
-const BottomBarComp = () => {
+const SimpleGameballApp = () => {
+  const showToast = async () => {
+    const gbapp = GameballApp.getInstance()
+
+    const config: GameballConfig = {
+      apiKey :"c2bbedacfff94672b2032e9ee0efda54",
+      language: "en"
+    };
+
+    // await gbapp.init(config);
+
+    // const customer: CustomerRegistrationRequest = {
+    //   customerId: "rn-01"
+    // }
+
+    // gbapp.registerCustomer(customer)
+
+    Alert.alert('Toast X', 'Button clicked!');
+  };
+
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="FullWidget" component={FullScreenWidget} />
-      <Tab.Screen name="Modal" component={ModalWidgetScreen} />
-    </Tab.Navigator>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      
+      <View style={styles.content}>
+        <Text style={styles.title}>Simple App</Text>
+        
+        <TouchableOpacity
+          style={styles.button}
+          onPress={showToast}
+        >
+          <Text style={styles.buttonText}>Show Toast</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 
-const AppNav = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Init" component={WidgetInitialization} />
-        <Stack.Screen name="Auth" component={AuthScreen} />
-        <Stack.Screen name="Home" component={BottomBarComp} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f9fa',
+  },
+  content: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30,
+    color: '#333',
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
 
-const App = () => {
-  const [notificationData, setNotificationData] =
-    useState<null | GBNotification>(null);
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      if (remoteMessage.data) {
-        setNotificationData(remoteMessage.data as unknown as GBNotification);
-      }
-
-      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
-    return unsubscribe;
-  }, []);
-  return (
-    <>
-      <AppNav />
-      <InAppNotification notification={notificationData} />
-    </>
-  );
-};
-
-export default App;
+export default SimpleGameballApp;

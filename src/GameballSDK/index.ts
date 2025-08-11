@@ -1,10 +1,10 @@
 import { Platform } from 'react-native';
 import GameballWidget from '../GameballWidget';
-import type { EventObject, Player } from './types';
+import type { EventObject, Customer } from './types';
 const package_json = require('../../package.json');
 
 let baseUrl = '';
-var playerId = '';
+var customerId = '';
 
 type GameballSDKHeadersType = {
   'OS': typeof Platform.OS;
@@ -23,30 +23,23 @@ let myHeaders: GameballSDKHeadersType = {
 
 const initializeBaseUrl = () => {
   if (!baseUrl) {
-    baseUrl = `${GameballWidget.apiPrefix}/api/v3.0/integrations`;
+    baseUrl = `${GameballWidget.apiPrefix}/api/v4.0/integrations`;
   }
 };
 
 const sendEvent = async (data: EventObject) => {
   if (!baseUrl) initializeBaseUrl();
 
-  const sendEventJson = {
-    events: data,
-    playerUniqueId: playerId,
-    sessionInfo: {
-      platform: 4,
-    },
-  };
-  return makeRequest(baseUrl + '/event', sendEventJson);
+  return makeRequest(baseUrl + '/events', data);
 };
 
-const registerPlayer = async (data: Player) => {
+const registerCustomer = async (data: Customer) => {
   if (!baseUrl) initializeBaseUrl();
 
-  playerId = data.playerUniqueId;
-  GameballWidget.initialize_player(playerId);
+  customerId = data.customerId;
+  GameballWidget.initializeCustomer(customerId);
   myHeaders = { ...myHeaders, APIKey: GameballWidget.apiKey };
-  return makeRequest(baseUrl + '/player', data);
+  return makeRequest(baseUrl + '/customers', data);
 };
 
 async function makeRequest(url: string, data: object) {
@@ -64,4 +57,4 @@ const getReferralCode = (url: string) => {
   return url.substring(index);
 };
 
-export { registerPlayer, sendEvent, getReferralCode };
+export { registerCustomer, sendEvent, getReferralCode };
