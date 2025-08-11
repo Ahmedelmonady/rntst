@@ -1,14 +1,14 @@
-export interface Player {
-  playerUniqueId: string;
+export interface Customer {
+  customerId: string;
   mobile?: string;
   email?: string;
-  referrerCode?: string;
+  referralCode?: string;
   levelOrder?: number;
-  playerAttributes?: PlayerAttributes;
+  customerAttributes?: CustomerAttributes;
   deviceToken?: string;
 }
 
-export type PlayerAttributes = {
+export type CustomerAttributes = {
   displayName?: string;
   firstName?: string;
   lastName?: string;
@@ -24,4 +24,9 @@ export type PlayerAttributes = {
 };
 
 type KeyValuePair = { [key: string]: any };
-export type EventObject = { [key: string]: KeyValuePair };
+export type EventObject = {
+  events: Record<string, Record<string, any>>;
+  customerId: string;
+  mobile?: string;
+  email?: string;
+};
